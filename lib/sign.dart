@@ -272,130 +272,134 @@ class _SignupScreenState extends State<SignupScreen> {
           centerTitle: true,
           backgroundColor: Color.fromARGB(255, 100, 69, 177),
         ),
-        body: Form(
-          key: formKey,
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TextFormField(
-                  onChanged: (data) {
-                    setState(() {
-                      FirstName = data;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'First Name',
-                  ),
-                ),
-                SizedBox(height: 17),
-                TextFormField(
-                  onChanged: (data) {
-                    setState(() {
-                      LastName = data;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Last Name',
-                  ),
-                ),
-                SizedBox(height: 17),
-                TextFormField(
-                  validator: (data) {
-                    if (data == null || data.isEmpty) {
-                      return 'Please enter an email';
-                    }
-                    return null;
-                  },
-                  onChanged: (data) {
-                    setState(() {
-                      Email = data;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                  ),
-                ),
-                SizedBox(height: 17),
-                TextFormField(
-                  validator: (data) {
-                    if (data == null || data.isEmpty) {
-                      return 'Please enter a password';
-                    }
-                    return null;
-                  },
-                  onChanged: (data) {
-                    setState(() {
-                      Password = data;
-                    });
-                  },
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                  ),
-                ),
-                SizedBox(height: 17),
-                TextFormField(
-                  validator: (data) {
-                    if (data == null || data.isEmpty) {
-                      return 'Please confirm your password';
-                    }
-                    if (data != Password) {
-                      return 'Passwords do not match';
-                    }
-                    return null;
-                  },
-                  onChanged: (data) {
-                    setState(() {
-                      ConfirmPassword = data;
-                    });
-                  },
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Confirm Password',
-                  ),
-                ),
-                SizedBox(height: 17),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (formKey.currentState!.validate()) {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      try {
-                        await registerUser(
-                          FirstName!,
-                          LastName!,
-                          UserName!,
-                          Email!,
-                          Password!,
-                          ConfirmPassword!
-                        );
-                        showSnackBar(context, "Registration successful");
-                        Navigator.pushNamed(context, "/autho");
-                      } catch (e) {
-                        showSnackBar(context, "Registration failed: $e");
-                      }
-                      setState(() {
-                        isLoading = false;
-                      });
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 39, 110, 176),
-                    padding: EdgeInsets.symmetric(horizontal: 91, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(27),
+        body: Center(
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextFormField(
+                      onChanged: (data) {
+                        setState(() {
+                          FirstName = data;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'First Name',
+                      ),
                     ),
-                  ),
-                  child: Text(
-                    "Sign up",
-                    style: TextStyle(fontSize: 22),
-                  ),
+                    SizedBox(height: 17),
+                    TextFormField(
+                      onChanged: (data) {
+                        setState(() {
+                          LastName = data;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Last Name',
+                      ),
+                    ),
+                    SizedBox(height: 17),
+                    TextFormField(
+                      validator: (data) {
+                        if (data == null || data.isEmpty) {
+                          return 'Please enter an email';
+                        }
+                        return null;
+                      },
+                      onChanged: (data) {
+                        setState(() {
+                          Email = data;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                      ),
+                    ),
+                    SizedBox(height: 17),
+                    TextFormField(
+                      validator: (data) {
+                        if (data == null || data.isEmpty) {
+                          return 'Please enter a password';
+                        }
+                        return null;
+                      },
+                      onChanged: (data) {
+                        setState(() {
+                          Password = data;
+                        });
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                      ),
+                    ),
+                    SizedBox(height: 17),
+                    TextFormField(
+                      validator: (data) {
+                        if (data == null || data.isEmpty) {
+                          return 'Please confirm your password';
+                        }
+                        if (data != Password) {
+                          return 'Passwords do not match';
+                        }
+                        return null;
+                      },
+                      onChanged: (data) {
+                        setState(() {
+                          ConfirmPassword = data;
+                        });
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Confirm Password',
+                      ),
+                    ),
+                    SizedBox(height: 17),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          try {
+                            await registerUser(
+                              FirstName!,
+                              LastName!,
+                              UserName!,
+                              Email!,
+                              Password!,
+                              ConfirmPassword!
+                            );
+                            showSnackBar(context, "Registration successful");
+                            Navigator.pushNamed(context, "/autho");
+                          } catch (e) {
+                            showSnackBar(context, "Registration failed: $e");
+                          }
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 39, 110, 176),
+                        padding: EdgeInsets.symmetric(horizontal: 91, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(27),
+                        ),
+                      ),
+                      child: Text(
+                        "Sign up",
+                        style: TextStyle(fontSize: 22),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
